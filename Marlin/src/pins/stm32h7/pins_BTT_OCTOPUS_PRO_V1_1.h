@@ -28,7 +28,7 @@
 //
 // Steppers
 //
-#define Z2_ENABLE_PIN                       PA2
+#define I_ENABLE_PIN                       PA2
 
 //
 // Heaters / Fans

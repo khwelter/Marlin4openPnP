@@ -780,7 +780,7 @@
 
 // If you want endstops to stay on (by default) even when not homing
 // enable this option. Override at any time with M120, M121.
-//#define ENDSTOPS_ALWAYS_ON_DEFAULT
+#define ENDSTOPS_ALWAYS_ON_DEFAULT
 
 // @section extras
 
@@ -933,8 +933,8 @@
 
 //#define SENSORLESS_BACKOFF_MM  { 2, 2, 0 }  // (linear=mm, rotational=°) Backoff from endstops before sensorless homing
 
-#define HOMING_BUMP_MM      { 5, 5, 2 }       // (linear=mm, rotational=°) Backoff from endstops after first bump
-#define HOMING_BUMP_DIVISOR { 2, 2, 4 }       // Re-Bump Speed Divisor (Divides the Homing Feedrate)
+#define HOMING_BUMP_MM      { 2, 2, 0, 0, 0, 0, 0, 0 }       // (linear=mm, rotational=°) Backoff from endstops after first bump
+#define HOMING_BUMP_DIVISOR { 2, 2, 2, 2, 2, 2, 2, 2 }       // Re-Bump Speed Divisor (Divides the Homing Feedrate)
 
 //#define HOMING_BACKOFF_POST_MM { 2, 2, 2 }  // (linear=mm, rotational=°) Backoff from endstops after homing
 //#define XY_COUNTERPART_BACKOFF_MM 0         // (mm) Backoff X after homing Y, and vice-versa
@@ -1081,26 +1081,11 @@
   #define G34_MAX_GRADE              5    // (%) Maximum incline that G34 will handle
   #define Z_STEPPER_ALIGN_ITERATIONS 5    // Number of iterations to apply during alignment
   #define Z_STEPPER_ALIGN_ACC        0.02 // Stop iterating early if the accuracy is better than this
-
   #define RESTORE_LEVELING_AFTER_G34      // Restore leveling after G34 is done?
-
   // After G34, re-home Z (G28 Z) or just calculate it from the last probe heights?
   // Re-homing might be more precise in reproducing the actual 'G28 Z' homing height, especially on an uneven bed.
   #define HOME_AFTER_G34
-
-  /**
-   * Commands to execute at the start of G34 probing,
-   * after switching to the PROBING_TOOL.
-   */
-  //#define EVENT_GCODE_BEFORE_G34 "M300 P440 S200"
-
-  /**
-   * Commands to execute at the end of G34 probing.
-   * Useful to retract or move the Z probe out of the way.
-   */
-  //#define EVENT_GCODE_AFTER_G34 "G1 Z10 F12000\nG1 X15 Y330\nG1 Z0.5\nG1 Z10"
-
-#endif // Z_STEPPER_AUTO_ALIGN
+#endif
 
 /**
  * Assisted Tramming
@@ -1243,7 +1228,7 @@
 
 // @section motion
 
-#define AXIS_RELATIVE_MODES { false, false, false, false }
+#define AXIS_RELATIVE_MODES { false, false, false, false, false, false, false, false }
 
 // Add a Duplicate option for well-separated conjoined nozzles
 //#define MULTI_NOZZLE_DUPLICATION
@@ -1269,13 +1254,13 @@
 #define DISABLE_IDLE_X
 #define DISABLE_IDLE_Y
 #define DISABLE_IDLE_Z    // Disable if the nozzle could fall onto your printed part!
-//#define DISABLE_IDLE_I
-//#define DISABLE_IDLE_J
-//#define DISABLE_IDLE_K
-//#define DISABLE_IDLE_U
-//#define DISABLE_IDLE_V
+#define DISABLE_IDLE_I
+#define DISABLE_IDLE_J
+#define DISABLE_IDLE_K
+#define DISABLE_IDLE_U
+#define DISABLE_IDLE_V
 //#define DISABLE_IDLE_W
-#define DISABLE_IDLE_E    // Shut down all idle extruders
+//#define DISABLE_IDLE_E    // Shut down all idle extruders
 
 // Default Minimum Feedrates for printing and travel moves
 #define DEFAULT_MINIMUMFEEDRATE       0.0     // (mm/s) Minimum feedrate. Set with M205 S.
@@ -1409,7 +1394,7 @@
  * Multi-stepping sends steps in bursts to reduce MCU usage for high step-rates.
  * This allows higher feedrates than the MCU could otherwise support.
  */
-#define MULTISTEPPING_LIMIT   16  // :[1, 2, 4, 8, 16, 32, 64, 128]
+#define MULTISTEPPING_LIMIT   16  //: [1, 2, 4, 8, 16, 32, 64, 128]
 
 /**
  * Adaptive Step Smoothing increases the resolution of multi-axis moves, particularly at step frequencies
@@ -2399,9 +2384,6 @@
  * For better results also enable ADAPTIVE_STEP_SMOOTHING.
  */
 //#define NONLINEAR_EXTRUSION
-#if ENABLED(NONLINEAR_EXTRUSION)
-  //#define NONLINEAR_EXTRUSION_DEFAULT_ON    // Enable if NLE should be ON by default
-#endif
 
 // @section leveling
 
@@ -3046,11 +3028,12 @@
   #define INTERPOLATE      true
 
   #if HAS_DRIVER(TMC2240)
-    #define TMC2240_RREF        12000   // (Ω) 12000 .. 60000. (FLY TMC2240 = 12300)
-    // Max Current. Lower for more internal resolution. Raise to run cooler.
-    #define TMC2240_CURRENT_RANGE   1   // :{ 0:'RMS=690mA PEAK=1A', 1:'RMS=1410mA PEAK=2A', 2:'RMS=2120mA PEAK=3A', 3:'RMS=2110mA PEAK=3A' }
-    // Slope Control: Lower is more silent. Higher runs cooler.
-    #define TMC2240_SLOPE_CONTROL   0   // :{ 0:'100V/µs', 1:'200V/µs', 2:'400V/µs', 3:'800V/µs' }
+    #define TMC2240_CURRENT_RANGE   1   // RMS: { 0:'690mA', 1:'1410mA', 2:'2120mA', 3:'2110mA' }
+                                        // PEAK:{ 0:'1A', 1:'2A', 2:'3A', 3:'3A' }
+                                        // Determines max current. Lower is more internal current resolution. Higher runs cooler.
+    #define TMC2240_Rref        12000   // ('rref', 12000, minval=12000, maxval=60000)
+    #define TMC2240_SLOPE_CONTROL   0   // :{ 0:'100V/us', 1:'200V/us', 2:'400V/us', 3:'800V/us' }
+                                        // Lower is more silent. Higher runs cooler.
   #endif
 
   #if AXIS_IS_TMC_CONFIG(X)
@@ -3481,13 +3464,13 @@
    * X/Y/Z_STALL_SENSITIVITY is the default stall threshold.
    * Use M914 X Y Z to set the stall threshold at runtime:
    *
-   *  Sensitivity  TMC2209        Others
+   *  Sensitivity  TMC2209/2240   Others
    *    HIGHEST        255         -64    (Too sensitive => False positive)
    *    LOWEST          0           63    (Too insensitive => No trigger)
    *
    * It is recommended to set HOMING_BUMP_MM to { 0, 0, 0 }.
    *
-   * SPI_ENDSTOPS  *** TMC2130, TMC2240, and TMC5160 Only ***
+   * SPI_ENDSTOPS  *** TMC2130/TMC5160 Only ***
    * Poll the driver through SPI to determine load when homing.
    * Removes the need for a wire from DIAG1 to an endstop pin.
    *
@@ -3500,7 +3483,7 @@
   //#define SENSORLESS_HOMING // StallGuard capable drivers only
 
   #if ANY(SENSORLESS_HOMING, SENSORLESS_PROBING)
-    // TMC2209: 0...255. TMC2130: -64...63
+    // TMC2209/2240: 0...255. TMC2130: -64...63
     #define X_STALL_SENSITIVITY  8
     #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
     #define Y_STALL_SENSITIVITY  8

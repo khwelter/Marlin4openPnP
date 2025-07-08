@@ -62,6 +62,11 @@
 #define X_STOP_PIN                    X_DIAG_PIN  // X-STOP
 #define Y_STOP_PIN                    Y_DIAG_PIN  // Y-STOP
 #define Z_STOP_PIN                    Z_DIAG_PIN  // Z-STOP
+#define I_STOP_PIN                   Z2_DIAG_PIN  // X-STOP
+#define J_STOP_PIN                   E0_DIAG_PIN  // Y-STOP
+#define K_STOP_PIN                   E1_DIAG_PIN  // Z-STOP
+#define U_STOP_PIN                   E2_DIAG_PIN  // Z-STOP
+#define V_STOP_PIN                   E3_DIAG_PIN  // Z-STOP
 #define X_OTHR_PIN                   E0_DIAG_PIN  // E0DET
 #define Y_OTHR_PIN                   E1_DIAG_PIN  // E1DET
 #define Z_OTHR_PIN                   E2_DIAG_PIN  // E2DET
@@ -135,39 +140,39 @@
   #define Z_CS_PIN                          PC6
 #endif
 
-#define Z2_STEP_PIN                         PG4   // MOTOR 3
-#define Z2_DIR_PIN                          PC1
-#ifndef Z2_CS_PIN
-  #define Z2_CS_PIN                         PC7
+#define I_STEP_PIN                         PG4   // MOTOR 3
+#define I_DIR_PIN                          PC1
+#ifndef I_CS_PIN
+  #define I_CS_PIN                         PC7
 #endif
 
-#define E0_STEP_PIN                         PF9   // MOTOR 4
-#define E0_DIR_PIN                          PF10
-#define E0_ENABLE_PIN                       PG2
-#ifndef E0_CS_PIN
-  #define E0_CS_PIN                         PF2
+#define J_STEP_PIN                         PF9   // MOTOR 4
+#define J_DIR_PIN                          PF10
+#define J_ENABLE_PIN                       PG2
+#ifndef J_CS_PIN
+  #define J_CS_PIN                         PF2
 #endif
 
-#define E1_STEP_PIN                         PC13  // MOTOR 5
-#define E1_DIR_PIN                          PF0
-#define E1_ENABLE_PIN                       PF1
-#ifndef E1_CS_PIN
-  #define E1_CS_PIN                         PE4
+#define K_STEP_PIN                         PC13  // MOTOR 5
+#define K_DIR_PIN                          PF0
+#define K_ENABLE_PIN                       PF1
+#ifndef K_CS_PIN
+  #define K_CS_PIN                         PE4
 #endif
 
-#define E2_STEP_PIN                         PE2   // MOTOR 6
-#define E2_DIR_PIN                          PE3
-#define E2_ENABLE_PIN                       PD4
-#ifndef E2_CS_PIN
+#define U_STEP_PIN                         PE2   // MOTOR 6
+#define U_DIR_PIN                          PE3
+#define U_ENABLE_PIN                       PD4
+#ifndef U_CS_PIN
 
-  #define E2_CS_PIN                         PE1
+  #define U_CS_PIN                         PE1
 #endif
 
-#define E3_STEP_PIN                         PE6   // MOTOR 7
-#define E3_DIR_PIN                          PA14
-#define E3_ENABLE_PIN                       PE0
-#ifndef E3_CS_PIN
-  #define E3_CS_PIN                         PD3
+#define V_STEP_PIN                         PE6   // MOTOR 7
+#define V_DIR_PIN                          PA14
+#define V_ENABLE_PIN                       PE0
+#ifndef V_CS_PIN
+  #define V_CS_PIN                         PD3
 #endif
 
 //

@@ -1,3 +1,6 @@
+<p>This fork is intended to support an openPnP SMD pick'n place unit with 1 head and 4 nozzles, based on a BTT Octopus V1.1 board<br/>
+This is work in progress and primarily a configuration project.</p>
+
 <p align="center"><img src="buildroot/share/pixmaps/logo/marlin-outrun-nf-500.png" height="250" alt="MarlinFirmware's logo" /></p>
 
 <h1 align="center">Marlin 3D Printer Firmware</h1>
