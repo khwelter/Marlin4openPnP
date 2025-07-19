@@ -1302,7 +1302,7 @@
  * 
  *  rotational 1,8° pre step => 16 steps/° / 1.8° => 8.8889 steps/ 1.0°
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 640, 640, 17.7, 17.7, 17.7, 17.7, 17.7, 17.7 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 640, 640, 8.889, 8.889, 8.889, 8.889, 8.889, 8.889 }
 
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
@@ -1314,11 +1314,11 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 200, 200, 7200, 7200, 7200, 7200, 7200, 7200 }
+#define DEFAULT_MAX_FEEDRATE          { 200, 200, 30000, 30000, 30000, 30000, 30000, 30000 }
 
 #define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
-  #define MAX_FEEDRATE_EDIT_VALUES    { 300, 300, 10800, 10800, 10800, 10800, 10800, 10800 } // ...or, set your own edit limits
+  #define MAX_FEEDRATE_EDIT_VALUES    { 300, 300, 45000, 45000, 45000, 45000, 45000, 45000 } // ...or, set your own edit limits
 #endif
 
 /**
@@ -1327,7 +1327,7 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 108000, 108000, 108000, 108000, 108000, 1080000 }
+#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 108000, 108000, 108000, 108000, 108000, 108000 }
 
 #define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -1948,7 +1948,7 @@
   #define MIN_SOFTWARE_ENDSTOP_K
 //  #define MIN_SOFTWARE_ENDSTOP_U
 //  #define MIN_SOFTWARE_ENDSTOP_V
-  #define MIN_SOFTWARE_ENDSTOP_W
+//  #define MIN_SOFTWARE_ENDSTOP_W
 #endif
 
 // Max software endstops constrain movement within maximum coordinate bounds
@@ -1962,7 +1962,7 @@
   #define MAX_SOFTWARE_ENDSTOP_K
 //  #define MAX_SOFTWARE_ENDSTOP_U
 //  #define MAX_SOFTWARE_ENDSTOP_V
-  #define MAX_SOFTWARE_ENDSTOP_W
+//  #define MAX_SOFTWARE_ENDSTOP_W
 #endif
 
 #if ANY(MIN_SOFTWARE_ENDSTOPS, MAX_SOFTWARE_ENDSTOPS)
@@ -2349,14 +2349,14 @@
 
 // Manually set the home position. Leave these undefined for automatic settings.
 // For DELTA this is the top-center of the Cartesian print volume.
-//#define MANUAL_X_HOME_POS 0
-//#define MANUAL_Y_HOME_POS 0
-//#define MANUAL_Z_HOME_POS 0
-//#define MANUAL_I_HOME_POS 0
-//#define MANUAL_J_HOME_POS 0
-//#define MANUAL_K_HOME_POS 0
-//#define MANUAL_U_HOME_POS 0
-//#define MANUAL_V_HOME_POS 0
+#define MANUAL_X_HOME_POS 0
+#define MANUAL_Y_HOME_POS 0
+#define MANUAL_Z_HOME_POS 0
+#define MANUAL_I_HOME_POS 0
+#define MANUAL_J_HOME_POS 0
+#define MANUAL_K_HOME_POS 0
+#define MANUAL_U_HOME_POS 0
+#define MANUAL_V_HOME_POS 0
 //#define MANUAL_W_HOME_POS 0
 
 /**
@@ -2375,7 +2375,7 @@
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (4*60), (50*60), (50*60), (4*60), (50*60), (4*60) }
+#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (250*60), (50*60), (50*60), (250*60), (50*60), (4*60) }
 
 // Edit homing feedrates with M210 and MarlinUI menu items
 #define EDITABLE_HOMING_FEEDRATE
