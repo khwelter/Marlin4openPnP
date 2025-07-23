@@ -1300,9 +1300,9 @@
  *  ball screw with 10 mm
  *  microstepping with 16 steps/step(1.8°) => 3200 steps per revolution => 320 steps/mm
  * 
- *  rotational 1,8° pre step => 16 steps/° / 1.8° => 8.8889 steps/ 1.0°
+ *  rotational 1,8° per step => 16 steps/° / 1.8° => 8.8889 steps/ 1.0°
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 640, 640, 8.889, 8.889, 8.889, 8.889, 8.889, 8.889 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 320, 320, 8.889, 8.889, 8.889, 8.889, 8.889, 8.889 }
 
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
@@ -1834,7 +1834,7 @@
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
 #define INVERT_X_DIR false
-#define INVERT_Y_DIR false
+#define INVERT_Y_DIR true
 #define INVERT_Z_DIR false
 #define INVERT_I_DIR false
 #define INVERT_J_DIR false
@@ -2375,7 +2375,7 @@
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (250*60), (50*60), (50*60), (250*60), (50*60), (4*60) }
+#define HOMING_FEEDRATE_MM_M { (10*60), (10*60), (250*60), (50*60), (50*60), (250*60), (50*60), (4*60) }
 
 // Edit homing feedrates with M210 and MarlinUI menu items
 #define EDITABLE_HOMING_FEEDRATE
